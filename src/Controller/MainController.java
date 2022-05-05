@@ -5,18 +5,30 @@ import java.awt.event.KeyListener;
 
 import View.MainFrame;
 
+/**
+ * This is the main controller for the snake game
+ * 
+ * Field        Description
+ * mainFrame    the main window
+ */
 public class MainController {
     private final MainFrame mainFrame;
     
+    /**
+     * constructor of main controller
+     */
     public MainController() {
         mainFrame = new MainFrame();
 
+        // add key listener for main frame
         mainFrame.addKeyListener(new KeyListener() {
+            // not in use
             @Override
             public void keyTyped(KeyEvent e) {}
 
             @Override
             public void keyPressed(KeyEvent e) {
+                // if main frame is in menu panel
                 if (mainFrame.getOnMenuPanel()) {
                     int key = e.getKeyCode();
 
@@ -33,6 +45,7 @@ public class MainController {
                             mainFrame.changePanel(gameType);
                             break;
                     }
+                // if main frame is in game panel
                 } else if(mainFrame.getOnGamePanel()) {
                     
                     int key = e.getKeyCode();
@@ -46,7 +59,8 @@ public class MainController {
                     }
                 }
             }
-
+            
+            // not in use
             @Override
             public void keyReleased(KeyEvent e) {}
         });

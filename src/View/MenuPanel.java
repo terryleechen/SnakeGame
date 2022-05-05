@@ -9,6 +9,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * This is the front end of menu panel
+ */
 public class MenuPanel extends JPanel{
     private final JLabel gameTitle;
     private final JLabel normalGame;
@@ -19,6 +22,9 @@ public class MenuPanel extends JPanel{
     private final JLabel selectedExit;
     private ImageIcon snake;
 
+    /**
+     * Constructor of menu panel
+     */
     MenuPanel() {
         gameTitle = new JLabel("Snake Game");
         normalGame = new JLabel("Normal Game");
@@ -95,7 +101,13 @@ public class MenuPanel extends JPanel{
         this.add(selectedExit);
     }
 
+    /**
+     * This function change the current selection
+     * 
+     * @param key (int)
+     */
     public void menuSelection(int key) {
+        // for normal game option
         if(this.selectedNormalGame.isVisible()) {
             switch(key) {
                 case KeyEvent.VK_DOWN:
@@ -110,6 +122,7 @@ public class MenuPanel extends JPanel{
 
             this.selectedNormalGame.setVisible(false);
             this.normalGame.setVisible(true);
+        // for no border game option
         } else if(this.selectedNoBorder.isVisible()) {
             switch(key) {
                 case KeyEvent.VK_DOWN:
@@ -124,6 +137,7 @@ public class MenuPanel extends JPanel{
 
             this.selectedNoBorder.setVisible(false);
             this.noBorder.setVisible(true);
+        // for exit option
         } else if(this.selectedExit.isVisible()) {
             switch(key) {
                 case KeyEvent.VK_DOWN:
@@ -141,6 +155,11 @@ public class MenuPanel extends JPanel{
         }   
     }
 
+    /**
+     * This function return the string of game type based on user selection
+     * 
+     * @return (String)
+     */
     public String menuOption() {
         String gameType = "";
 
