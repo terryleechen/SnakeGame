@@ -19,6 +19,7 @@ public class MainFrame extends JFrame {
         this.setResizable(false);
         this.setVisible(true);
     }
+    //random comment
 
     public boolean getOnMenuPanel() {
         return this.onMenuPanel;
