@@ -8,6 +8,7 @@ class GamePanel extends JPanel {
         this.setBounds(0,0,600,600);
         this.setBackground(Color.black);
         this.setLayout(null);
+        
     }    
     
 }
