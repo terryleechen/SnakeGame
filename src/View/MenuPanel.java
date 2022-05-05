@@ -140,4 +140,17 @@ public class MenuPanel extends JPanel{
             this.selectedExit.setVisible(false);
         }   
     }
+
+    public String menuOption() {
+        String gameType = "";
+
+        if(selectedNormalGame.isVisible()) {
+            gameType = "normal";
+        } else if(selectedNoBorder.isVisible()) {
+            gameType = "no border";
+        } else if(selectedExit.isVisible()) {
+            gameType = "exit";
+        }
+        return gameType;
+    }
 }
