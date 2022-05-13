@@ -21,6 +21,8 @@ public class MainFrame extends JFrame {
     private final GamePanel gamePanel = new GamePanel();
     private boolean onMenuPanel;
     private boolean onGamePanel;
+    int screenHeight = 600;
+    int screenWidth = 600;
 
     /**
      * This is the constructor of main frame
