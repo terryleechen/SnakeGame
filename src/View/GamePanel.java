@@ -18,7 +18,7 @@ class GamePanel extends JPanel {
 
     GamePanel() {
         this.setBounds(0,0,screenHeight,screenWidth);
-        this.setBackground(Color.BLACK);
+        this.setBackground(Color.black);
         this.setLayout(null);
         random = new Random();
         startGame();
@@ -32,9 +32,8 @@ class GamePanel extends JPanel {
         // generate the coordinates of the new Mouse. Can be used when the game begins, apples gets eaten etc
         mouseX = random.nextInt((int)(screenWidth/unitSize)*unitSize);   // X coordinate
         mouseY = random.nextInt((int)(screenHeight/unitSize)*unitSize);  // Y coordinate
-        g.setColor(Color.GRAY);
         g.fillOval(mouseX, mouseY, unitSize, 2);
-
+        g.setColor(Color.gray);
     }
 
     /* FOR TEST PURPOSES ONLY!!!
