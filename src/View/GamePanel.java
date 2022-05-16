@@ -1,8 +1,8 @@
 package View;
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javafx.scene.paint.Color;
 import java.util.Random;
 
 class GamePanel extends JPanel {
@@ -12,36 +12,30 @@ class GamePanel extends JPanel {
     int screenWidth = 600;
     int unitSize = 20;
     int canFitXUnits = (screenWidth*screenHeight)/unitSize;
-    int Delay = 75;
-    int bodyParts = 4;                       
-    int miceEaten;
     int mouseX;
     int mouseY;
-    char direction = 'R';
     Random random;
-    // 2 arrays (x,y) that hold the coordinates for all the body parts
-    int x[] = new int[canFitXUnits];
-    int y[] = new int[canFitXUnits];
-
 
     GamePanel() {
         this.setBounds(0,0,screenHeight,screenWidth);
-        this.setBackground(Color.black);
+        this.setBackground(Color.BLACK);
         this.setLayout(null);
         random = new Random();
         startGame();
-    }    
-
+    }
+    
     public void startGame(){
         running = true;
-        newMouse();
     }
 
-    public void newMouse(){
-        mouseX = random.nextInt((int)(screenWidth/unitSize)*unitSize);
+    public void newMouse(Graphics g){
+        // generate the coordinates of the new Mouse. Can be used when the game begins, apples gets eaten etc
+        mouseX = random.nextInt((int)(screenWidth/unitSize)*unitSize);   // X coordinate
+        mouseY = random.nextInt((int)(screenHeight/unitSize)*unitSize);  // Y coordinate
+        g.setColor(Color.GRAY);
+        g.fillOval(mouseX, mouseY, unitSize, 2);
 
     }
-
 
     /* FOR TEST PURPOSES ONLY!!!
        Creates a grid for visualizing game- normal mode
