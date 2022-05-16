@@ -1,8 +1,6 @@
 package View;
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import javafx.scene.paint.Color;
 import java.util.Random;
 
 class GamePanel extends JPanel {
