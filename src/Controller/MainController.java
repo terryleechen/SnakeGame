@@ -3,6 +3,7 @@ package Controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import Model.GameModel;
 import View.MainFrame;
 
 /**
@@ -13,12 +14,17 @@ import View.MainFrame;
  */
 public class MainController {
     private final MainFrame mainFrame;
+    private final GameModel gameModel;
     
     /**
      * constructor of main controller
      */
     public MainController() {
         mainFrame = new MainFrame();
+        gameModel = new GameModel();
+
+        mainFrame.getGamePanel().setGameModel(gameModel);
+        gameModel.setGamePanel(mainFrame.getGamePanel());
 
         // add key listener for main frame
         mainFrame.addKeyListener(new KeyListener() {
@@ -41,15 +47,38 @@ public class MainController {
                             break;
                         case KeyEvent.VK_ENTER:
                             String gameType = mainFrame.getMenuPanel().menuOption();
-                            System.out.println(gameType);
                             mainFrame.changePanel(gameType);
+
+                            if(mainFrame.getOnGamePanel()) {
+                                gameOn();
+                            }
                             break;
                     }
                 // if main frame is in game panel
                 } else if(mainFrame.getOnGamePanel()) {
-                    
                     int key = e.getKeyCode();
+
                     switch(key) {
+                        case KeyEvent.VK_UP:
+                            if(!gameModel.getDirection().equals("D")) {
+                                gameModel.setDirection("U");
+                            }
+                            break;
+                        case KeyEvent.VK_DOWN:
+                            if(!gameModel.getDirection().equals("U")) {
+                                gameModel.setDirection("D");
+                            }
+                            break;
+                        case KeyEvent.VK_RIGHT:
+                            if(!gameModel.getDirection().equals("L")) {
+                                gameModel.setDirection("R");
+                            }
+                            break;
+                        case KeyEvent.VK_LEFT:
+                            if(!gameModel.getDirection().equals("R")) {
+                                gameModel.setDirection("L");
+                            }
+                            break;
                         //case KeyEvent.VK_ENTER:
                             //mainFrame.changePanel("normal");
                             //break;
@@ -64,7 +93,11 @@ public class MainController {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+           
+    }
+
+    private void gameOn() {
+        gameModel.startGame();
     }
 
     

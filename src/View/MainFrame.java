@@ -74,6 +74,10 @@ public class MainFrame extends JFrame {
         return this.onGamePanel;
     }
 
+    public GamePanel getGamePanel() {
+        return this.gamePanel;
+    }
+
     /**
      * This function changes between panels
      * 
