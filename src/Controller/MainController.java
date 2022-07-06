@@ -85,6 +85,7 @@ public class MainController {
                             //break;
                         case KeyEvent.VK_ESCAPE:
                             if(count % 2 == 0) {
+                                System.out.println(KeyEvent.VK_ESCAPE);
                                 int score = gameModel.getAppleEatten();
                                 mainFrame.getPausePanel().setScore(score);
                                 mainFrame.getPausePanel().pauseGame();

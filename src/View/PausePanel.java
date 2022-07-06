@@ -8,6 +8,8 @@ import java.awt.event.KeyEvent;
 
 public class PausePanel extends JPanel {
     private final JLabel currentScore;
+    private final JLabel resume;
+    private final JLabel selectedResume;
     private final JLabel setting;
     private final JLabel selectedSetting;
     private final JLabel restart;
@@ -22,14 +24,18 @@ public class PausePanel extends JPanel {
         this.setLayout(null);
 
         currentScore = new JLabel("Score: " + score);
-        setting = new JLabel("setting");
-        selectedSetting = new JLabel("<setting>");
-        restart = new JLabel("restart");
-        selectedRestart = new JLabel("<restart>");
-        quit = new JLabel("quit");
-        selectedQuit = new JLabel("<quit>");
+        resume = new JLabel("Resume");
+        selectedResume = new JLabel("<Resume>");
+        setting = new JLabel("Setting");
+        selectedSetting = new JLabel("<Setting>");
+        restart = new JLabel("Restart");
+        selectedRestart = new JLabel("<Restart>");
+        quit = new JLabel("Quit");
+        selectedQuit = new JLabel("<Quit>");
 
         this.add(currentScore);
+        this.add(resume);
+        this.add(selectedResume);
         this.add(setting);
         this.add(selectedSetting);
         this.add(restart);
@@ -46,47 +52,61 @@ public class PausePanel extends JPanel {
         currentScore.setFont(new Font("Sans-serif", Font.BOLD, 36));
         currentScore.setBounds(200,0,600,200);
 
+        // resume
+        resume.setVisible(false);
+        resume.setForeground(Color.white);
+        resume.setBackground(Color.black);
+        resume.setFont(new Font("Sans-serif", Font.BOLD, 25));
+        resume.setBounds(200,200,200,50);
+
+        // selected resume
+        selectedResume.setVisible(true);
+        selectedResume.setForeground(Color.white);
+        selectedResume.setBackground(Color.black);
+        selectedResume.setFont(new Font("Sans-serif", Font.BOLD, 25));
+        selectedResume.setBounds(200,200,200,50);
+
         // setting
         setting.setVisible(false);
         setting.setForeground(Color.white);
         setting.setBackground(Color.black);
         setting.setFont(new Font("Sans-serif", Font.BOLD, 25));
-        setting.setBounds(200,200,200,50);
+        setting.setBounds(200,250,200,50);
 
         // selected setting
-        selectedSetting.setVisible(true);
+        selectedSetting.setVisible(false);
         selectedSetting.setForeground(Color.white);
         selectedSetting.setBackground(Color.black);
         selectedSetting.setFont(new Font("Sans-serif", Font.BOLD, 25));
-        selectedSetting.setBounds(200,200,200,50);
+        selectedSetting.setBounds(200,250,200,50);
 
         // restart
         restart.setVisible(true);
         restart.setForeground(Color.white);
         restart.setBackground(Color.black);
         restart.setFont(new Font("Sans-serif", Font.BOLD, 25));
-        restart.setBounds(200,250,200,50);
+        restart.setBounds(200,300,200,50);
 
         // selected restart
         selectedRestart.setVisible(false);
         selectedRestart.setForeground(Color.white);
         selectedRestart.setBackground(Color.black);
         selectedRestart.setFont(new Font("Sans-serif", Font.BOLD, 25));
-        selectedRestart.setBounds(200,250,200,50);
+        selectedRestart.setBounds(200,300,200,50);
 
         // quit
         quit.setVisible(true);
         quit.setForeground(Color.white);
         quit.setBackground(Color.black);
         quit.setFont(new Font("Sans-serif", Font.BOLD, 25));
-        quit.setBounds(200,300,200,50);
+        quit.setBounds(200,350,200,50);
 
         // selected quit
         selectedQuit.setVisible(false);
         selectedQuit.setForeground(Color.white);
         selectedQuit.setBackground(Color.black);
         selectedQuit.setFont(new Font("Sans-serif", Font.BOLD, 25));
-        selectedQuit.setBounds(200,300,200,50);
+        selectedQuit.setBounds(200,350,200,50);
     }
 
     public void setScore(int score) {
@@ -94,7 +114,22 @@ public class PausePanel extends JPanel {
     }
 
     public void pauseMenu(int key) {
-        if(this.selectedSetting.isVisible()) {
+
+        if(this.selectedResume.isVisible()) {
+            switch(key) {
+                case KeyEvent.VK_DOWN:
+                    this.selectedSetting.setVisible(true);
+                    this.setting.setVisible(false);
+                    break;
+                case KeyEvent.VK_UP:
+                    this.selectedQuit.setVisible(true);
+                    this.quit.setVisible(false);
+                    break;
+            }
+
+            this.selectedResume.setVisible(false);
+            this.resume.setVisible(true);
+        }else if(this.selectedSetting.isVisible()) {
             switch(key) {
                 case KeyEvent.VK_DOWN:
                     this.selectedRestart.setVisible(true);
