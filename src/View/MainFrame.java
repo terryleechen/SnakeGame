@@ -19,8 +19,10 @@ public class MainFrame extends JFrame {
     private CardLayout cardLayout;
     private final MenuPanel menuPanel = new MenuPanel();
     private final GamePanel gamePanel = new GamePanel();
+    private final PausePanel pausePanel = new PausePanel();
     private boolean onMenuPanel;
     private boolean onGamePanel;
+    private boolean onPausePanel;
     int screenHeight = 600;
     int screenWidth = 600;
 
@@ -40,8 +42,9 @@ public class MainFrame extends JFrame {
         container = this.getContentPane();
         container.setLayout(this.cardLayout);
 
-        container.add(menuPanel);
-        container.add(gamePanel);
+        container.add(menuPanel, "menu");
+        container.add(gamePanel, "game");
+        container.add(pausePanel, "pause");
 
         this.setSize(600,600);
         this.setBackground(Color.black);
@@ -74,8 +77,16 @@ public class MainFrame extends JFrame {
         return this.onGamePanel;
     }
 
+    public boolean getOnPausePanel() {
+        return this.onPausePanel;
+    }
+
     public GamePanel getGamePanel() {
         return this.gamePanel;
+    }
+
+    public PausePanel getPausePanel() {
+        return this.pausePanel;
     }
 
     /**
@@ -88,17 +99,24 @@ public class MainFrame extends JFrame {
             case "normal":
                 this.onMenuPanel = false;
                 this.onGamePanel = true;
-                this.cardLayout.next(this.container);
+                this.onPausePanel = false;
+                this.cardLayout.show(this.container, "game");
                 break;
             case "no border":
                 this.onMenuPanel = false;
                 this.onGamePanel = true;
-                this.cardLayout.next(this.container);
+                this.cardLayout.show(this.container, "game");
                 break;
             case "menu":
                 this.onMenuPanel = true;
                 this.onGamePanel = false;
-                this.cardLayout.next(this.container);
+                this.onPausePanel = false;
+                this.cardLayout.show(this.container, "menu");
+                break;
+            case "pause":
+                this.cardLayout.show(this.container, "pause");
+                this.onPausePanel = true;
+                this.onGamePanel = false;
                 break;
         }
     }

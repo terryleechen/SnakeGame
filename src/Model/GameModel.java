@@ -15,12 +15,9 @@ public class GameModel extends KeyAdapter implements ActionListener {
     private static final int UNIT_SIZE = 25;
     private static final int SCREEN_SIZE = 600;
     private static final int GAME_UNITS = SCREEN_SIZE * SCREEN_SIZE / UNIT_SIZE;
-    private static final int TEMPO = 75;
-    private int x[];
-    private int y[];
-    private int bodyParts;
+    private static final int TEMPO = 100;
+    private int x[], y[], bodyParts, appleX, appleY, appleEatten;
     private Random random;
-    private int appleX, appleY;
     private String direction = "R";
     private boolean isRunning;
     private Timer timer;
@@ -32,6 +29,7 @@ public class GameModel extends KeyAdapter implements ActionListener {
         bodyParts = 6;
         
     }
+
     public void startGame()
     {
         isRunning = true;
@@ -41,6 +39,15 @@ public class GameModel extends KeyAdapter implements ActionListener {
         timer.start();
     }
 
+    public void pauseTimer() {
+        timer.stop();
+    }
+
+    public void restartTimer() {
+        timer.start();
+    }
+    
+    
     public void setGamePanel(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
@@ -61,6 +68,10 @@ public class GameModel extends KeyAdapter implements ActionListener {
         return appleY;
     }
 
+    public int getAppleEatten () {
+        return this.appleEatten;
+    }
+    
     public String getDirection() {
         return direction;
     }
@@ -88,43 +99,15 @@ public class GameModel extends KeyAdapter implements ActionListener {
         appleY = random.nextInt((int)(SCREEN_SIZE/UNIT_SIZE)) * UNIT_SIZE;
     }
 
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if(isRunning) {
             move();
             checkApple();
             checkCollisions();
-        } else {
-            //newApple();
         }
-        gamePanel.repaint();
-        
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        switch(e.getKeyCode()) {
-            case KeyEvent.VK_UP:
-                if(!direction.equals("D")) {
-                    direction = "U";
-                }
-                break;
-            case KeyEvent.VK_DOWN:
-                if(!direction.equals("U")) {
-                    direction = "D";
-                }
-                break;
-            case KeyEvent.VK_LEFT:
-                if(!direction.equals("R")) {
-                    direction = "L";
-                }
-                break;
-            case KeyEvent.VK_RIGHT:
-                if(!direction.equals("L")) {
-                    direction = "R";
-                }
-                break;
-        }
+        gamePanel.repaint();   
     }
 
     private void move() {
@@ -181,7 +164,8 @@ public class GameModel extends KeyAdapter implements ActionListener {
     public void checkApple() {
         if((x[0] == appleX) && (y[0] == appleY)) {
 			bodyParts++;
-			//applesEaten++;
+			appleEatten++;
+            System.out.println(appleEatten);
 			newApple();
 		}
     }

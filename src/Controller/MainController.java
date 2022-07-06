@@ -15,6 +15,7 @@ import View.MainFrame;
 public class MainController {
     private final MainFrame mainFrame;
     private final GameModel gameModel;
+    private int count;
     
     /**
      * constructor of main controller
@@ -83,7 +84,30 @@ public class MainController {
                             //mainFrame.changePanel("normal");
                             //break;
                         case KeyEvent.VK_ESCAPE:
-                            mainFrame.changePanel("menu");
+                            if(count % 2 == 0) {
+                                int score = gameModel.getAppleEatten();
+                                mainFrame.getPausePanel().setScore(score);
+                                mainFrame.getPausePanel().pauseGame();
+                                mainFrame.changePanel("pause");
+                                gameModel.pauseTimer();
+                                count++;
+                            } else {
+                                mainFrame.changePanel("normal");
+                                gameModel.restartTimer();
+                                count++;
+                            }
+                            break;
+                            
+                    }
+                } else if(mainFrame.getOnPausePanel()) {
+                    int key = e.getKeyCode();
+                    
+                    switch(key) {
+                        case KeyEvent.VK_UP:
+                            mainFrame.getPausePanel().pauseMenu(key);
+                            break;
+                        case KeyEvent.VK_DOWN:
+                            mainFrame.getPausePanel().pauseMenu(key);
                             break;
                     }
                 }
@@ -98,9 +122,7 @@ public class MainController {
 
     private void gameOn() {
         gameModel.startGame();
+        gameModel.newApple();
     }
 
-    
-
-    
 }

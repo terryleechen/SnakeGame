@@ -59,7 +59,7 @@ public class MenuPanel extends JPanel{
         selectedNormalGame.setBounds(200,200,200,50);
 
         //set no Border game
-        selectedNoBorder.setVisible(true);
+        noBorder.setVisible(true);
         noBorder.setForeground(Color.white);
         noBorder.setBackground(Color.black);
         noBorder.setFont(new Font("Sans-serif", Font.BOLD, 25));
